@@ -3,3 +3,4 @@
 !src/in
 !src/out
 src/out/*
+!/**/.gitkeep
