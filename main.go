@@ -60,8 +60,21 @@ func start() {
 		log.Fatal(err)
 	}
 
+	var myFileType = map[string]int{
+		".jpge": 1,
+		".jpg":  2,
+		".png":  3,
+		".gif":  4,
+	}
+
 	// count all files and multiply them for 4 versions
-	count := len(files) * 4
+	var count = 0
+	for _, f := range files {
+		if _, ok := myFileType[filepath.Ext(folder_in+f.Name())]; ok {
+			count++
+		}
+	}
+	count = count * 4
 
 	// create and start new bar
 	bar := pb.StartNew(count)
@@ -69,10 +82,12 @@ func start() {
 
 	// start with the resize
 	for _, f := range files {
-		normal(f.Name(), 0, 53, "_small", bar)
-		normal(f.Name(), 0, 512, "", bar)
-		marked(f.Name(), 0, 53, "_small_mark", "small.png", false, bar)
-		marked(f.Name(), 0, 512, "_mark", "normal.png", true, bar)
+		if _, ok := myFileType[filepath.Ext(folder_in+f.Name())]; ok {
+			normal(f.Name(), 0, 53, "_small", bar)
+			normal(f.Name(), 0, 512, "", bar)
+			marked(f.Name(), 0, 53, "_small_mark", "small.png", false, bar)
+			marked(f.Name(), 0, 512, "_mark", "normal.png", true, bar)
+		}
 	}
 
 	// done
