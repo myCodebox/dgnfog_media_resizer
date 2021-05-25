@@ -40,3 +40,6 @@ Why do you press Ctrl + C?
 * castel.jpg - jacek-dylag-DcQ8dSqEosA-unsplash.jpg
 * jellyfish.jpg - jeffrey-hamilton-JtVyK2Sej2I-unsplash.jpg
 * waterflower.jpg - jon-geng-MM1FpBrhBPE-unsplash.jpg
+
+#### Todo
+* check if a file is an image
