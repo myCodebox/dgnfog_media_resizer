@@ -1,0 +1,5 @@
+/src/*
+!src/mark
+!src/in
+!src/out
+src/out/*
