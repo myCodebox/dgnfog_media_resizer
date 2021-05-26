@@ -38,19 +38,64 @@ func main() {
 
 START:
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Press \"y\" to start resizing: ")
+	fmt.Print("🐞 Press [s] to start or [c] for config: ")
 
 	char, _, err := reader.ReadRune()
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	if char == 'y' || char == 'Y' {
+	switch char {
+	case 's', 'S':
 		start()
-	} else {
+	case 'c', 'C':
+		fmt.Print("   - Cleanup the output folder? [y/n]: ")
+
+		reader := bufio.NewReader(os.Stdin)
+		char, _, err := reader.ReadRune()
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		switch char {
+		case 'y', 'Y':
+			cleanup(folder_out)
+		default:
+			goto START
+		}
+
+	default:
 		goto START
 	}
 
+	// if char == 'y' || char == 'Y' {
+	// 	start()
+	// } else {
+	// 	goto START
+	// }
+
+}
+
+func cleanup(dir string) error {
+	files, err := filepath.Glob(filepath.Join(dir, "*"))
+	if err != nil {
+		return err
+	}
+	for _, file := range files {
+		err = os.RemoveAll(file)
+		if err != nil {
+			return err
+		}
+	}
+
+	f, err := os.Create(dir + ".gitkeep")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer f.Close()
+
+	return nil
 }
 
 func start() {
@@ -75,6 +120,8 @@ func start() {
 		}
 	}
 	count = count * 4
+
+	fmt.Println("Start with the resizing ...")
 
 	// create and start new bar
 	bar := pb.StartNew(count)
