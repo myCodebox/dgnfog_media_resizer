@@ -21,7 +21,7 @@ func resize() {
 	}
 
 	var myFileType = map[string]int{
-		".jpge": 1,
+		".jpeg": 1,
 		".jpg":  2,
 		".png":  3,
 		".gif":  4,
