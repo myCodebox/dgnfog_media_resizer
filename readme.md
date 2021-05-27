@@ -6,32 +6,37 @@ A small image processor script written in go.
 
 Start the script
 ```bash
+# run the script
 go run .
+
+# build the script
+go build .
 ```
 
 ---
 ## Welcome screen
-```
- +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+ +-+ +-+
- |D| |N| |G| |F| |O| |G|   |M| |e| |d| |i| |a|
- +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+ +-+ +-+
+```bash
+# +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+ +-+ +-+
+# |D| |N| |G| |F| |O| |G|   |M| |e| |d| |i| |a|
+# +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+ +-+ +-+
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? What do you want to do:
-  > Fetch from JSON to input folder
-    Start resizing
+  > Fetch images from Server (use JSON)
+    Resize images
+    Upload to s3 bucket
     Cleanup input folder
     Cleanup output folder
     Exit
 ```
 
 ---
-## Fetch from JSON to input folder
+## Fetch images from Server (use JSON)
 Update the JSON file `./src/json/media.json` or get it from the Redaxo backend page (addon Digitalocean) and overwrite it.
 
 The app fetch the images and store it in the input folder `./src/in/`
 
 ---
-## Start resizing
+## Resize images
 Resize all images from the input folder `./src/in/`and save 4 versions of each image.
 
 Name | width | height
@@ -40,6 +45,10 @@ normal | auto | 512
 small | auto | 53
 normal_mark | auto | 512
 small_mark | auto | 53
+
+---
+### Upload to s3 bucket
+Upload all images from the output folder `./src/out/` to a s3 bucket set in the .env file.
 
 ---
 ## Cleanup input folder
@@ -55,10 +64,10 @@ Stop the running script. Also `Ctrl + C` works =)
 
 ---
 ## Custom folder
-Use the `.env` file to set your own in and out folder.
+Use the `.env` file to set your own in and out folder and some other stuff.
 
 Default settings:
-```
+```bash
 # Folder
 FOLDER_IN="./src/in/" 
 FOLDER_OUT="./src/out/"
@@ -70,6 +79,13 @@ JSON_FILE="./src/json/media.json"
 INSECURE_SKIP_VERIFY=true
 MAX_IDLE_CONNS=20
 MAX_IDLE_CONNS_PER_HOST=20
+
+# s3
+S3_REGION="s3"
+S3_BUCKET="go_upload"
+S3_AKID="AKIAIOSFODNN7EXAMPLE"
+S3_SECRET_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+S3_TOKEN=""
 ```
 
 ---
@@ -84,5 +100,7 @@ MAX_IDLE_CONNS_PER_HOST=20
 * jellyfish.jpg - jeffrey-hamilton-JtVyK2Sej2I-unsplash.jpg
 * waterflower.jpg - jon-geng-MM1FpBrhBPE-unsplash.jpg
 
-#### Todo
+---
+### Todo
 * ~~check if a file is an image~~
+* ~~upload files in output folder to s3~~

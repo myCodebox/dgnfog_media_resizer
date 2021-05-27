@@ -30,9 +30,9 @@ func fetch() {
 
 		// don't worry about errors
 		tr := &http.Transport{
-			TLSClientConfig:     &tls.Config{InsecureSkipVerify: env_insecureSkipVerify},
-			MaxIdleConns:        env_maxIdleConns,
-			MaxIdleConnsPerHost: env_maxIdleConnsPerHost,
+			TLSClientConfig:     &tls.Config{InsecureSkipVerify: INSECURE_SKIP_VERIFY},
+			MaxIdleConns:        MAX_IDLE_CONNS,
+			MaxIdleConnsPerHost: MAX_IDLE_CONNS_PER_HOST,
 		}
 		client := &http.Client{Transport: tr}
 		response, e := client.Get(url)
@@ -42,7 +42,7 @@ func fetch() {
 		defer response.Body.Close()
 
 		//open a file for writing
-		file, err := os.Create(env_folder_in + id + ext)
+		file, err := os.Create(FOLDER_IN + id + ext)
 		if err != nil {
 			log.Fatal(err)
 		}

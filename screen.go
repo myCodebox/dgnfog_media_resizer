@@ -14,18 +14,20 @@ START:
 	// clear screen
 	CallClear()
 
-	myFigure := figure.NewFigure("DNGFOG Media", "digital", true)
-	myFigure.Print()
+	figure.NewColorFigure("DNGFOG Media", "digital", "green", true).Print()
+	fmt.Println("")
 
 	prompt := promptui.Select{
 		Label: "What do you want to do",
 		Items: []string{
-			"Fetch from JSON to input folder",
-			"Start resizing",
+			"Fetch images from Server (use JSON)",
+			"Resize images",
+			"Upload to s3 bucket",
 			"Cleanup input folder",
 			"Cleanup output folder",
 			"Exit",
 		},
+		Size: 6,
 	}
 
 	key, _, err := prompt.Run()
@@ -37,7 +39,7 @@ START:
 
 	switch key {
 	case 0:
-		if loadjson(env_json_file) {
+		if loadjson(JSON_FILE) {
 			fmt.Println(len(media.Media))
 			fetch()
 			time.Sleep(1 * time.Second)
@@ -48,15 +50,18 @@ START:
 		time.Sleep(3 * time.Second)
 		goto START
 	case 2:
-		cleanup(env_folder_in)
+		upload()
 		time.Sleep(1 * time.Second)
 		goto START
 	case 3:
-		cleanup(env_folder_out)
+		cleanup(FOLDER_IN)
 		time.Sleep(1 * time.Second)
 		goto START
 	case 4:
-		CallClear()
+		cleanup(FOLDER_OUT)
+		time.Sleep(1 * time.Second)
+		goto START
+	case 5:
 		os.Exit(0)
 	}
 }

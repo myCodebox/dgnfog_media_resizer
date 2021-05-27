@@ -8,12 +8,30 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var env_folder_in string
-var env_folder_out string
-var env_json_file string
-var env_insecureSkipVerify bool
-var env_maxIdleConns int
-var env_maxIdleConnsPerHost int
+var (
+	FOLDER_IN               string
+	FOLDER_OUT              string
+	JSON_FILE               string
+	INSECURE_SKIP_VERIFY    bool
+	MAX_IDLE_CONNS          int
+	MAX_IDLE_CONNS_PER_HOST int
+	S3_REGION               string
+	S3_BUCKET               string
+	S3_AKID                 string
+	S3_SECRET_KEY           string
+	S3_TOKEN                string
+
+	// myFileType = map[string]int{
+	FILE_TYPE = map[string]int{
+		".jpg":  1,
+		".jpeg": 2,
+		".png":  3,
+		".gif":  4,
+		".tif":  5,
+		".tiff": 6,
+		".bmp":  7,
+	}
+)
 
 func main() {
 
@@ -22,19 +40,25 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	env_folder_in = os.Getenv("FOLDER_IN")
-	env_folder_out = os.Getenv("FOLDER_OUT")
-	env_json_file = os.Getenv("JSON_FILE")
+	FOLDER_IN = os.Getenv("FOLDER_IN")
+	FOLDER_OUT = os.Getenv("FOLDER_OUT")
+	JSON_FILE = os.Getenv("JSON_FILE")
 
 	if i, err := strconv.ParseBool(os.Getenv("INSECURE_SKIP_VERIFY")); err == nil {
-		env_insecureSkipVerify = i
+		INSECURE_SKIP_VERIFY = i
 	}
 	if i, err := strconv.Atoi(os.Getenv("MAX_IDLE_CONNS")); err == nil {
-		env_maxIdleConns = i
+		MAX_IDLE_CONNS = i
 	}
 	if i, err := strconv.Atoi(os.Getenv("MAX_IDLE_CONNS_PER_HOST")); err == nil {
-		env_maxIdleConnsPerHost = i
+		MAX_IDLE_CONNS_PER_HOST = i
 	}
+
+	S3_REGION = os.Getenv("S3_REGION")
+	S3_BUCKET = os.Getenv("S3_BUCKET")
+	S3_AKID = os.Getenv("S3_AKID")
+	S3_SECRET_KEY = os.Getenv("S3_SECRET_KEY")
+	S3_TOKEN = os.Getenv("S3_TOKEN")
 
 	screen()
 }
