@@ -15,7 +15,7 @@ import (
 func resize() {
 
 	// read all files in folder
-	files, err := os.ReadDir(folder_in)
+	files, err := os.ReadDir(env_folder_in)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -33,14 +33,14 @@ func resize() {
 	// count all files and multiply them for 4 versions
 	var count = 0
 	for _, f := range files {
-		if _, ok := myFileType[filepath.Ext(folder_in+f.Name())]; ok {
+		if _, ok := myFileType[filepath.Ext(env_folder_in+f.Name())]; ok {
 			count++
 		}
 	}
 	count = count * 4
 
 	if count == 0 {
-		fmt.Println("Sorry the folder \"", folder_in, "\" is empty")
+		fmt.Println("Sorry the folder \"", env_folder_in, "\" is empty")
 		return
 	}
 
@@ -52,7 +52,7 @@ func resize() {
 
 	// start with the resize
 	for _, f := range files {
-		if _, ok := myFileType[filepath.Ext(folder_in+f.Name())]; ok {
+		if _, ok := myFileType[filepath.Ext(env_folder_in+f.Name())]; ok {
 			normal(f.Name(), 0, 53, "_small", bar)
 			normal(f.Name(), 0, 512, "", bar)
 			marked(f.Name(), 0, 53, "_small_mark", "small.png", false, bar)
@@ -64,12 +64,12 @@ func resize() {
 	bar.FinishPrint("")
 	bar.FinishPrint("----------------------------------------")
 	bar.FinishPrint("Yeah, done! \\o/")
-	bar.FinishPrint(strconv.Itoa(count) + " Images are stored in folder \"" + folder_out + "\"")
+	bar.FinishPrint(strconv.Itoa(count) + " Images are stored in folder \"" + env_folder_out + "\"")
 	bar.FinishPrint("----------------------------------------")
 }
 
 func normal(name string, w int, h int, save string, bar *pb.ProgressBar) {
-	src, err := imaging.Open(folder_in + name)
+	src, err := imaging.Open(env_folder_in + name)
 	if err != nil {
 		log.Fatalf("failed to open image: %v", err)
 	}
@@ -77,7 +77,7 @@ func normal(name string, w int, h int, save string, bar *pb.ProgressBar) {
 	rw, rh := getMaxSize(src, w, h)
 	dst := imaging.Resize(src, rw, rh, imaging.Linear)
 
-	err = imaging.Save(dst, folder_out+setName(name, save))
+	err = imaging.Save(dst, env_folder_out+setName(name, save))
 	if err != nil {
 		log.Fatalf("failed to save image: %v", err)
 	}
@@ -86,7 +86,7 @@ func normal(name string, w int, h int, save string, bar *pb.ProgressBar) {
 }
 
 func marked(name string, w int, h int, save string, mark string, gray bool, bar *pb.ProgressBar) {
-	src, err := imaging.Open(folder_in + name)
+	src, err := imaging.Open(env_folder_in + name)
 	if err != nil {
 		log.Fatalf("failed to open image: %v", err)
 	}
@@ -108,7 +108,7 @@ func marked(name string, w int, h int, save string, mark string, gray bool, bar 
 		dst = imaging.Overlay(dst, overlay, image.Pt(bgW, bgH), 1.0)
 	}
 
-	err = imaging.Save(dst, folder_out+setName(name, save))
+	err = imaging.Save(dst, env_folder_out+setName(name, save))
 	if err != nil {
 		log.Fatalf("failed to save image: %v", err)
 	}

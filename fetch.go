@@ -14,10 +14,6 @@ import (
 
 func fetch() {
 
-	// for i := 0; i < len(media.Media); i++ {
-	// 	fmt.Println(media.Media[i].Id, media.Media[i].Path)
-	// }
-
 	fmt.Println("Fetch image ...")
 
 	count := len(media.Media)
@@ -34,9 +30,9 @@ func fetch() {
 
 		// don't worry about errors
 		tr := &http.Transport{
-			TLSClientConfig:     &tls.Config{InsecureSkipVerify: true},
-			MaxIdleConns:        20,
-			MaxIdleConnsPerHost: 20,
+			TLSClientConfig:     &tls.Config{InsecureSkipVerify: env_insecureSkipVerify},
+			MaxIdleConns:        env_maxIdleConns,
+			MaxIdleConnsPerHost: env_maxIdleConnsPerHost,
 		}
 		client := &http.Client{Transport: tr}
 		response, e := client.Get(url)
@@ -46,7 +42,7 @@ func fetch() {
 		defer response.Body.Close()
 
 		//open a file for writing
-		file, err := os.Create(folder_in + id + ext)
+		file, err := os.Create(env_folder_in + id + ext)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -57,10 +53,6 @@ func fetch() {
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		// if i%10 == 0 {
-		// 	time.Sleep(1 * time.Second)
-		// }
 
 		bar.Increment()
 	}

@@ -65,6 +65,11 @@ FOLDER_OUT="./src/out/"
 
 # Json
 JSON_FILE="./src/json/media.json"
+
+# HTTP
+INSECURE_SKIP_VERIFY=true
+MAX_IDLE_CONNS=20
+MAX_IDLE_CONNS_PER_HOST=20
 ```
 
 ---

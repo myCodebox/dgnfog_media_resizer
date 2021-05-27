@@ -37,7 +37,7 @@ START:
 
 	switch key {
 	case 0:
-		if loadjson(json_file) {
+		if loadjson(env_json_file) {
 			fmt.Println(len(media.Media))
 			fetch()
 			time.Sleep(1 * time.Second)
@@ -48,11 +48,11 @@ START:
 		time.Sleep(3 * time.Second)
 		goto START
 	case 2:
-		cleanup(folder_in)
+		cleanup(env_folder_in)
 		time.Sleep(1 * time.Second)
 		goto START
 	case 3:
-		cleanup(folder_out)
+		cleanup(env_folder_out)
 		time.Sleep(1 * time.Second)
 		goto START
 	case 4:

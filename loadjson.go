@@ -36,11 +36,5 @@ func loadjson(path string) bool {
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	json.Unmarshal(byteValue, &media)
 
-	// fmt.Println(len(media.Media))
-
-	// for i := 0; i < len(media.Media); i++ {
-	// 	fmt.Println(media.Media[i].Id, media.Media[i].Path)
-	// }
-
 	return true
 }
