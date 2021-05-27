@@ -80,4 +80,4 @@ JSON_FILE="./src/json/media.json"
 * waterflower.jpg - jon-geng-MM1FpBrhBPE-unsplash.jpg
 
 #### Todo
-* check if a file is an image
+* ~~check if a file is an image~~
