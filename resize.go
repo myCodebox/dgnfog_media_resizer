@@ -21,10 +21,13 @@ func resize() {
 	}
 
 	var myFileType = map[string]int{
-		".jpeg": 1,
-		".jpg":  2,
+		".jpg":  1,
+		".jpeg": 2,
 		".png":  3,
 		".gif":  4,
+		".tif":  5,
+		".tiff": 6,
+		".bmp":  7,
 	}
 
 	// count all files and multiply them for 4 versions
