@@ -43,10 +43,10 @@ func resize() {
 	// start with the resize
 	for _, f := range files {
 		if _, ok := FILE_TYPE[filepath.Ext(FOLDER_IN+f.Name())]; ok {
-			normal(f.Name(), 0, 53, "_small", bar)
+			normal(f.Name(), 0, 53, "-small", bar)
 			normal(f.Name(), 0, 512, "", bar)
-			marked(f.Name(), 0, 53, "_small_mark", "small.png", false, bar)
-			marked(f.Name(), 0, 512, "_mark", "normal.png", true, bar)
+			marked(f.Name(), 0, 53, "-small-mark", "small.png", false, bar)
+			marked(f.Name(), 0, 512, "-mark", "normal.png", true, bar)
 		}
 	}
 

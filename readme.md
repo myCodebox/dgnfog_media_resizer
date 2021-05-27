@@ -43,8 +43,8 @@ Name | width | height
 --- | --- | ---:
 normal | auto | 512
 small | auto | 53
-normal_mark | auto | 512
-small_mark | auto | 53
+normal-mark | auto | 512
+small-mark | auto | 53
 
 ---
 ### Upload to s3 bucket
