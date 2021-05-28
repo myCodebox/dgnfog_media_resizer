@@ -17,6 +17,7 @@ var (
 	MAX_IDLE_CONNS_PER_HOST int
 	S3_REGION               string
 	S3_BUCKET               string
+	S3_ENDPOINT             string
 	S3_AKID                 string
 	S3_SECRET_KEY           string
 	S3_TOKEN                string
@@ -56,6 +57,7 @@ func main() {
 
 	S3_REGION = os.Getenv("S3_REGION")
 	S3_BUCKET = os.Getenv("S3_BUCKET")
+	S3_ENDPOINT = os.Getenv("S3_ENDPOINT")
 	S3_AKID = os.Getenv("S3_AKID")
 	S3_SECRET_KEY = os.Getenv("S3_SECRET_KEY")
 	S3_TOKEN = os.Getenv("S3_TOKEN")
