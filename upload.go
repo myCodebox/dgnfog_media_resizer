@@ -21,7 +21,7 @@ func upload() {
 	s, err := session.NewSession(&aws.Config{
 		Region:           aws.String(S3_REGION),
 		Credentials:      credentials.NewStaticCredentials(S3_AKID, S3_SECRET_KEY, S3_TOKEN),
-		Endpoint:         aws.String("http://localhost:9444/s3"),
+		Endpoint:         aws.String(S3_ENDPOINT),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 	})
@@ -41,7 +41,6 @@ func upload() {
 			count++
 		}
 	}
-	count = count * 4
 
 	if count == 0 {
 		fmt.Println("Sorry the folder \"", FOLDER_OUT, "\" is empty")
