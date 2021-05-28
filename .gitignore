@@ -1,6 +1,9 @@
 .env
-src/in/*
-src/out/*
+
+tmp/in/*
+tmp/out/*
+
 src/json/*
 !src/json/media.json
+
 !/**/.gitkeep

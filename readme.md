@@ -33,11 +33,11 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ## Fetch images from Server (use JSON)
 Update the JSON file `./src/json/media.json` or get it from the Redaxo backend page (addon Digitalocean) and overwrite it.
 
-The app fetch the images and store it in the input folder `./src/in/`
+The app fetch the images and store it in the input folder `./tmp/in/`
 
 ---
 ## Resize images
-Resize all images from the input folder `./src/in/`and save 4 versions of each image.
+Resize all images from the input folder `./tmp/in/`and save 4 versions of each image.
 
 Name | width | height
 --- | --- | ---:
@@ -48,15 +48,15 @@ small-mark | auto | 53
 
 ---
 ### Upload to s3 bucket
-Upload all images from the output folder `./src/out/` to a s3 bucket set in the .env file.
+Upload all images from the output folder `./tmp/out/` to a s3 bucket set in the .env file.
 
 ---
 ## Cleanup input folder
-This cleanup the output folder `./src/in/` and remove all file.
+This cleanup the output folder `./tmp/in/` and remove all file.
 
 ---
 ## Cleanup output folder
-This cleanup the output folder `./src/out/` and remove all file.
+This cleanup the output folder `./tmp/out/` and remove all file.
 
 ---
 ## Exit
@@ -69,8 +69,8 @@ Use the `.env` file to set your own in and out folder and some other stuff.
 Default settings:
 ```bash
 # Folder
-FOLDER_IN="./src/in/" 
-FOLDER_OUT="./src/out/"
+FOLDER_IN="./tmp/in/" 
+FOLDER_OUT="./tmp/out/"
 
 # Json
 JSON_FILE="./src/json/media.json"
@@ -83,10 +83,21 @@ MAX_IDLE_CONNS_PER_HOST=20
 # s3
 S3_REGION="s3"
 S3_BUCKET="go_upload"
+S3_ENDPOINT="http://localhost:9444/s3"
 S3_AKID="AKIAIOSFODNN7EXAMPLE"
 S3_SECRET_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 S3_TOKEN=""
 ```
+
+---
+## Local testing
+For local testing i use [s3ninja](https://s3ninja.net/) running in Docker. Start the Docker container and open http://localhost:9444/s3/ui in your browser and create a new private  bucket called `go_upload`.
+
+Fetch the test images, resize it and upload it to the s3 bucket.
+
+Done 🐞
+
+
 
 ---
 ### Image from unsplash.com (v0.1-alpha)
