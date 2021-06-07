@@ -89,9 +89,20 @@ func marked(name string, w int, h int, save string, markpath string, gray bool, 
 	rw, rh := getMaxSize(src, w, h)
 	dst := imaging.Resize(src, rw, rh, imaging.Linear)
 	if gray {
+		var max_w, max_h int
+		if dst.Bounds().Dx() > dst.Bounds().Dy() {
+			max_w = dst.Bounds().Dy()
+			max_h = dst.Bounds().Dy()
+		} else {
+			max_w = dst.Bounds().Dx()
+			max_h = dst.Bounds().Dx()
+		}
+
+		dst_overlay := imaging.Resize(overlay, max_w, max_h, imaging.Linear)
+
 		dst = imaging.Grayscale(dst)
 		dst = imaging.AdjustContrast(dst, 20)
-		dst = imaging.OverlayCenter(dst, overlay, 1.0)
+		dst = imaging.OverlayCenter(dst, dst_overlay, 1.0)
 	} else {
 		bgW := dst.Bounds().Dx() - (overlay.Bounds().Dx() + 5)
 		bgH := dst.Bounds().Dy() - (overlay.Bounds().Dy() + 5)
