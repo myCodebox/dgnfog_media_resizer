@@ -45,8 +45,8 @@ func resize() {
 		if _, ok := FILE_TYPE[filepath.Ext(FOLDER_IN+f.Name())]; ok {
 			normal(f.Name(), 0, 53, "-small", bar)
 			normal(f.Name(), 0, 512, "", bar)
-			marked(f.Name(), 0, 53, "-small-mark", "small.png", false, bar)
-			marked(f.Name(), 0, 512, "-mark", "normal.png", true, bar)
+			marked(f.Name(), 0, 53, "-small-mark", MARK_SMALL, false, bar)
+			marked(f.Name(), 0, 512, "-mark", MARK_NORMAL, true, bar)
 		}
 	}
 
@@ -75,13 +75,13 @@ func normal(name string, w int, h int, save string, bar *pb.ProgressBar) {
 	bar.Increment()
 }
 
-func marked(name string, w int, h int, save string, mark string, gray bool, bar *pb.ProgressBar) {
+func marked(name string, w int, h int, save string, markpath string, gray bool, bar *pb.ProgressBar) {
 	src, err := imaging.Open(FOLDER_IN + name)
 	if err != nil {
 		log.Fatalf("failed to open image: %v", err)
 	}
 
-	overlay, err := imaging.Open("./src/mark/" + mark)
+	overlay, err := imaging.Open(markpath)
 	if err != nil {
 		log.Fatalf("failed to open image: %v", err)
 	}

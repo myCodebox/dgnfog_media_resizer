@@ -21,6 +21,8 @@ var (
 	S3_AKID                 string
 	S3_SECRET_KEY           string
 	S3_TOKEN                string
+	MARK_NORMAL             string
+	MARK_SMALL              string
 
 	// myFileType = map[string]int{
 	FILE_TYPE = map[string]int{
@@ -61,6 +63,8 @@ func main() {
 	S3_AKID = os.Getenv("S3_AKID")
 	S3_SECRET_KEY = os.Getenv("S3_SECRET_KEY")
 	S3_TOKEN = os.Getenv("S3_TOKEN")
+	MARK_NORMAL = os.Getenv("MARK_NORMAL")
+	MARK_SMALL = os.Getenv("MARK_SMALL")
 
 	screen()
 }
