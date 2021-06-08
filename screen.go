@@ -21,13 +21,14 @@ START:
 		Label: "What do you want to do",
 		Items: []string{
 			"Fetch images from Server (use JSON)",
+			"Test folder against JSON file",
 			"Resize images",
 			"Upload to s3 bucket",
 			"Cleanup input folder",
 			"Cleanup output folder",
 			"Exit",
 		},
-		Size: 6,
+		Size: 7,
 	}
 
 	key, _, err := prompt.Run()
@@ -46,22 +47,29 @@ START:
 		}
 		goto START
 	case 1:
+		if loadjson(JSON_FILE) {
+			fmt.Println(len(media.Media))
+			check()
+			time.Sleep(4 * time.Second)
+		}
+		goto START
+	case 2:
 		resize()
 		time.Sleep(3 * time.Second)
 		goto START
-	case 2:
+	case 3:
 		upload()
 		time.Sleep(1 * time.Second)
 		goto START
-	case 3:
+	case 4:
 		cleanup(FOLDER_IN)
 		time.Sleep(1 * time.Second)
 		goto START
-	case 4:
+	case 5:
 		cleanup(FOLDER_OUT)
 		time.Sleep(1 * time.Second)
 		goto START
-	case 5:
+	case 6:
 		os.Exit(0)
 	}
 }

@@ -13,7 +13,6 @@ import (
 )
 
 func fetch() {
-
 	fmt.Println("Fetch image ...")
 
 	count := len(media.Media)
