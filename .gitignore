@@ -1,11 +1,8 @@
 .env
-
 vendor
-
 tmp/in/*
 tmp/out/*
-
+log/*
 src/json/*
 !src/json/media.json
-
 !/**/.gitkeep

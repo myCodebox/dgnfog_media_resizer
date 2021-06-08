@@ -1,4 +1,4 @@
-module github.com/mycodebox/resizer_test
+module github.com/mycodebox/dgnfog_media_resizer
 
 go 1.16
 
